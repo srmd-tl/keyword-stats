@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class KeywordStat extends Model
 {
     use HasFactory;
+    protected $guarded=[];
 }
