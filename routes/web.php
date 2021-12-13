@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    return redirect()->route('voyager.dashboard');
     $data = "https://www.bhg.com/kitchen/remodeling/planning/kitchen-remodeling/";
     dd(\Illuminate\Support\Str::contains($data,strtolower(str_replace(' ','-','kitchens remodeling'))));
     $response =array (
