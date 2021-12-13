@@ -32,7 +32,7 @@ class Helper
         $inDescription = [];
 
         $data = self::fetchGoogleSearch($keyword);
-        $totalResults = $data->search_information->total_results;
+        $totalResults = $data->search_information->total_results??count($data->organic_results);
         $results = $data->organic_results;
         foreach ($results as $result) {
             if ($result->title && Str::contains(strtolower($result->title), strtolower($keyword))) {
