@@ -10,17 +10,6 @@ use Illuminate\Support\Str;
 class Helper
 {
 
-    /**
-     * @param $keyword
-     * @return false|mixed
-     */
-    public static function fetchGoogleSearch($keyword)
-    {
-        $client = new \GoogleSearch(env('SERP_API'));
-        $query = ["q" => 'Intitle:"' . $keyword . '"'];
-        return $client->get_json($query);
-    }
-
     /**\
      * @param $keyword
      * @return array
@@ -32,20 +21,38 @@ class Helper
         $inDescription = [];
 
         $data = self::fetchGoogleSearch($keyword);
-        $totalResults = $data->search_information->total_results??count($data->organic_results);
+        $inTitleData = self::fetchGoogleSearch($keyword,true);
+
+        $totalResults = $inTitleData->search_information->total_results ?? count($inTitleData->organic_results);
         $results = $data->organic_results;
         foreach ($results as $result) {
             if ($result->title && Str::contains(strtolower($result->title), strtolower($keyword))) {
                 $inTitle[] = $result->title;
             }
-            if ($result->link && Str::contains(strtolower($result->link), strtolower(str_replace(' ','-',$keyword)))) {
+            if ($result->link && Str::contains(strtolower($result->link), strtolower(str_replace(' ', '-', $keyword)))) {
                 $inUrl[] = $result->link;
             }
-            if ($result->snippet && Str::contains(strtolower($result->snippet),strtolower($keyword))) {
+            if ($result->snippet && Str::contains(strtolower($result->snippet), strtolower($keyword))) {
                 $inDescription[] = $result->snippet;
             }
         }
         return ['inTitle' => $inTitle, 'inDescription' => $inDescription, 'inUrl' => $inUrl, 'totalResults' => $totalResults];
+    }
+
+    /**
+     * @param $keyword
+     * @return false|mixed
+     */
+    public static function fetchGoogleSearch($keyword, $inTitle = false)
+    {
+        $client = new \GoogleSearch(env('SERP_API'));
+        if ($inTitle) {
+            $query = ["q" => 'intitle:"'. $keyword . '"'];
+        } else {
+            $query = ["q" => $keyword];
+
+        }
+        return $client->get_json($query);
     }
 
     /**
