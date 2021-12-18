@@ -60,8 +60,8 @@
                                 <input type="password" class="form-control" id="password" name="password" value="" autocomplete="new-password">
                             </div>
                             <div class="form-group">
-                                <label for="name">{{ __('voyager::generic.remaining_keyword') }}</label>
-                                <input type="text" class="form-control" id="remaining_keywords" name="remaining_keywords" placeholder="{{ __('voyager::generic.remaining_keywords') }}"
+                                <label for="name">Remaining Keywords</label>
+                                <input type="text" class="form-control" id="remaining_keywords" name="remaining_keywords" placeholder="Remaining Keywords"
                                        value="@if(isset($dataTypeContent->remaining_keywords)){{ $dataTypeContent->remaining_keywords }}@endif">
                             </div>
 

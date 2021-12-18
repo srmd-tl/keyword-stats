@@ -11,6 +11,10 @@ class KeywordStatController extends BaseVoyagerBaseController
 {
     public function store(Request $request)
     {
+        if(auth()->user()->remaining_keywords<=0)
+        {
+            return back()->withErrors('Limit reached! please recharge the package');
+        }
         //fetch stats from keywordeverywhere api
         $kwStats = Helper::fetchStats($request->keyword);
         $difficulty = 0;
