@@ -30,12 +30,18 @@ class KeywordStatController extends BaseVoyagerBaseController
         //generate Intitle,Inurl etc
         $googleStats = Helper::purifyData($request->keyword);
         if ($googleStats) {
-            if ($googleStats['totalResults'] <= 5) {
+            if ($googleStats['totalResults'] >= 0 && $googleStats['totalResults'] <= 10 ) {
                 $difficulty = 0;
-            } else if ($googleStats['totalResults'] >= 11 && $googleStats['totalResults'] <= 50) {
+            } else if ($googleStats['totalResults'] >= 11 && $googleStats['totalResults'] <= 20) {
                 $difficulty = 1;
-            } else if ($googleStats['totalResults'] >= 51 && $googleStats['totalResults'] <= 100) {
+            } else if ($googleStats['totalResults'] >= 21 && $googleStats['totalResults'] <= 50) {
                 $difficulty = 2;
+            }
+            else if ($googleStats['totalResults'] >= 51 && $googleStats['totalResults'] <= 100) {
+                $difficulty = 3;
+            }
+            else if ($googleStats['totalResults'] > 100 ) {
+                $difficulty = 4;
             }
             $request->request->add(['kw_in_url' => count($googleStats['inUrl'])]);
             $request->request->add(['kw_in_title' => count($googleStats['inTitle'])]);

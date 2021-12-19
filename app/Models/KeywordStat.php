@@ -13,15 +13,15 @@ class KeywordStat extends Model
 
     public function getDifficultyAttribute($value)
     {
-        if ($value <= 10) {
+        if ($value == 0) {
             $value = "Very Easy";
-        } else if ($value > 10 && $value <= 20) {
+        } else if ($value == 1) {
             $value = "Easy";
-        } else if ($value > 20 && $value <= 50) {
+        } else if ($value ==2) {
             $value = "Medium";
-        } else if ($value > 50 && $value <= 100) {
+        } else if ($value ==3) {
             $value = "Hard";
-        } else if ($value > 100) {
+        } else if ($value ==4) {
             $value = "Very Hard";
         }
         return $value;
