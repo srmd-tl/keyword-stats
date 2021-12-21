@@ -21,7 +21,7 @@ class Helper
         $inDescription = [];
 
         $data = self::fetchGoogleSearch($keyword);
-        $inTitleData = self::fetchGoogleSearch($keyword,true);
+        $inTitleData = self::fetchGoogleSearch($keyword, true);
 
         $totalResults = $inTitleData->search_information->total_results ?? count($inTitleData->organic_results);
         $results = $data->organic_results;
@@ -47,7 +47,7 @@ class Helper
     {
         $client = new \GoogleSearch(env('SERP_API'));
         if ($inTitle) {
-            $query = ["q" => 'intitle:"'. $keyword . '"'];
+            $query = ["q" => 'intitle:"' . $keyword . '"'];
         } else {
             $query = ["q" => $keyword];
 
@@ -57,7 +57,7 @@ class Helper
 
     /**
      * @param $keyword
-     * @return array|mixed
+     * @return object
      */
     public static function fetchStats($keyword)
     {
@@ -70,6 +70,17 @@ class Helper
             ])
             ->object();
     }
+
+    /**
+     * @param $keyword
+     * @return object
+     */
+    public static function fetchStatsUsingKeywordIo($keyword): object
+    {
+        $url = sprinf('https://api.keyword.io/related_keywords?api_token=%s&q=%s', env('KWIO_API', $keyword));
+        return Http::get($url)->object();
+    }
+
 
 }
 
