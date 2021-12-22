@@ -77,7 +77,7 @@ class Helper
      */
     public static function fetchStatsUsingKeywordIo($keyword): object
     {
-        $url = sprinf('https://api.keyword.io/related_keywords?api_token=%s&q=%s', env('KWIO_API', $keyword));
+        $url = sprintf('https://api.keyword.io/related_keywords?api_token=%s&q=%s', env('KWIO_API'), $keyword);
         return Http::get($url)->object();
     }
 
