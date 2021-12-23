@@ -47,7 +47,7 @@ class KeywordStatController extends BaseVoyagerBaseController
                 $request->request->add(['difficulty' => $difficulty]);
                 $request->request->add(['keyword' =>  $kwStatsObj->kw]);
 
-                if( $googleStats['totalResults'] >0)
+                if( $vol >0)
                 {
                     $request->request->add(['ratio' => $googleStats['totalResults'] / $vol]);
                 }
