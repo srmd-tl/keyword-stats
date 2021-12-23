@@ -16,7 +16,7 @@ class KeywordStatController extends BaseVoyagerBaseController
         }
         //fetch stats from keywrodio api
         $kwStats = Helper::fetchStatsUsingKeywordIo($request->keyword);
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             if ($kwStats) {
                 $kwStatsObj = $kwStats->keywords[$i];
                 $vol = $kwStatsObj->n;
