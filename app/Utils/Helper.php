@@ -32,7 +32,7 @@ class Helper
             if ($result->link && Str::contains(strtolower($result->link), strtolower(str_replace(' ', '-', $keyword)))) {
                 $inUrl[] = $result->link;
             }
-            if ($result->snippet && Str::contains(strtolower($result->snippet), strtolower($keyword))) {
+            if (isset($result->snippet) && Str::contains(strtolower($result->snippet), strtolower($keyword))) {
                 $inDescription[] = $result->snippet;
             }
         }
