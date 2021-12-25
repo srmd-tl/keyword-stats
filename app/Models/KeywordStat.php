@@ -26,4 +26,8 @@ class KeywordStat extends Model
         }
         return $value;
     }
+
+    public function scopeProjects($query){
+        return $query->where('user_id', auth()->user()->id);
+    }
 }
