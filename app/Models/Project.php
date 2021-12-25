@@ -10,6 +10,8 @@ class Project extends Model
     use HasFactory;
 
     protected $guarded = [];
-
+    public function scopeProjects($query){
+        return $query->where('user_id', auth()->user()->id);
+    }
 
 }
