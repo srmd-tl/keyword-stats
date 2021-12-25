@@ -16,7 +16,7 @@ class ProjectController extends BaseVoyagerBaseController
      */
     public function store(Request $request)
     {
-        $request->request->add(['user_id' => auth()->user()->id]);
+        Project::create(['user_id' => auth()->user()->id, 'name' => $request->name]);
     }
 
 }
