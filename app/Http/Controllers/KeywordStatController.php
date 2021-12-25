@@ -47,6 +47,8 @@ class KeywordStatController extends BaseVoyagerBaseController
                 $request->request->add(['difficulty' => $difficulty]);
                 $request->request->add(['keyword' =>  $kwStatsObj->kw]);
                 $request->request->add(['users_id'=>auth()->user()->id]);
+                $request->request->add(['project_id'=>$request->project_id]);
+
 
                 if( $vol >0)
                 {
