@@ -14,7 +14,10 @@ class AlterKeywordStatsTable extends Migration
     {
         Schema::table('keyword_stats', function ($table) {
             $table->foreignId('user_id')->nullable();
+            $table->foreignId('project_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
+
         });
     }
 
@@ -26,10 +29,10 @@ class AlterKeywordStatsTable extends Migration
     public function down()
     {
         Schema::table('keyword_stats', function ($table) {
-            // 1. Drop foreign key constraints
             $table->dropForeign(['user_id']);
-            // 2. Drop the column
             $table->dropColumn('user_id');
+            $table->dropForeign(['project_id']);
+            $table->dropColumn('project_id');
         });
     }
 }
