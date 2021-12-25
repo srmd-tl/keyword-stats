@@ -46,6 +46,7 @@ class KeywordStatController extends BaseVoyagerBaseController
                 $request->request->add(['kw_in_description' => count($googleStats['inDescription'])]);
                 $request->request->add(['difficulty' => $difficulty]);
                 $request->request->add(['keyword' =>  $kwStatsObj->kw]);
+                $request->request->add(['users_id'=>auth()->user()->id]);
 
                 if( $vol >0)
                 {
