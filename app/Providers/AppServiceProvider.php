@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Actions\KeywordAction;
 use Illuminate\Support\ServiceProvider;
+use TCG\Voyager\Facades\Voyager;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -22,5 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Voyager::addAction(KeywordAction::class);
     }
+
 }

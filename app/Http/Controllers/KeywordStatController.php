@@ -9,6 +9,7 @@ use TCG\Voyager\Http\Controllers\VoyagerBaseController as BaseVoyagerBaseControl
 
 class KeywordStatController extends BaseVoyagerBaseController
 {
+
     public function store(Request $request)
     {
         if (auth()->user()->remaining_keywords <= 0) {
@@ -46,7 +47,7 @@ class KeywordStatController extends BaseVoyagerBaseController
                 $request->request->add(['kw_in_description' => count($googleStats['inDescription'])]);
                 $request->request->add(['difficulty' => $difficulty]);
                 $request->request->add(['keyword' =>  $kwStatsObj->kw]);
-                $request->request->add(['users_id'=>auth()->user()->id]);
+                $request->request->add(['user_id'=>auth()->user()->id]);
                 $request->request->add(['project_id'=>$request->project_id]);
 
 

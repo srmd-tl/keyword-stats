@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class KeywordStat extends Model
 {
@@ -30,5 +32,15 @@ class KeywordStat extends Model
     public function scopeProjects($query){
         return $query->where('user_id', auth()->user()->id);
 
+    }
+    protected static function boot()
+    {
+        parent::boot();
+        // Customize your own rule here!
+        if (request()->project) {
+            static::addGlobalScope('project', function (Builder $builder) {
+                $builder->where('project_id', request()->project);
+            });
+        }
     }
 }
