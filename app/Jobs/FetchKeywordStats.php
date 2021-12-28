@@ -25,6 +25,8 @@ class FetchKeywordStats implements ShouldQueue
     public function __construct(string $keyword, int $userId, int $projectId)
     {
         $this->keyword = $keyword;
+        $this->userId=$userId;
+        $this->projectId=$projectId;
     }
 
     /**
