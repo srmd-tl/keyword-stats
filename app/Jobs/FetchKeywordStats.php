@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Models\KeywordStat;
+use App\Models\User;
 use App\Utils\Helper;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -17,6 +18,7 @@ class FetchKeywordStats implements ShouldQueue
     private $keyword;
     private $userId;
     private $projectId;
+
     /**
      * Create a new job instance.
      *
@@ -25,8 +27,8 @@ class FetchKeywordStats implements ShouldQueue
     public function __construct(string $keyword, int $userId, int $projectId)
     {
         $this->keyword = $keyword;
-        $this->userId=$userId;
-        $this->projectId=$projectId;
+        $this->userId = $userId;
+        $this->projectId = $projectId;
     }
 
     /**
@@ -79,6 +81,9 @@ class FetchKeywordStats implements ShouldQueue
                 $temp['in_title_url_result'] = $googleStats['totalResults'];
             }
             KeywordStat::firstOrCreate(['keyword' => $kwStatsObj->kw], $temp);
+            $user = User::find($this->userId);
+            $user->update(['remaining_keywords' => $user->remaining_keywords - 1]);
+
         }
     }
 }

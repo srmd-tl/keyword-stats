@@ -22,7 +22,7 @@ class Helper
 
         $data = self::fetchGoogleSearch($keyword);
         $inTitleData = self::fetchGoogleSearch($keyword, true);
-        if (isset($inTitleData->organic_results)) {
+        if (property_exists($inTitleData->organic_results)) {
             $totalResults = $inTitleData->search_information->total_results ?? count($inTitleData->organic_results);
             $results = $data->organic_results;
             foreach ($results as $result) {
