@@ -40,7 +40,7 @@ class FetchKeywordStats implements ShouldQueue
     {
         //fetch stats from keywrodio api
         $kwStats = Helper::fetchStatsUsingKeywordIo($this->keyword);
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < (int)setting('admin.no_record'); $i++) {
             try {
 
                 $temp = [];
